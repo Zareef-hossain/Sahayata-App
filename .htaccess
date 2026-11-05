@@ -1,0 +1,9 @@
+# XAMPP: lets you open http://localhost/sahayata-app/ instead of .../sahayata-app/public/
+# Everything is forwarded to the public/ folder, so app/, config/, database/
+# and storage/ can never be opened directly from the browser.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

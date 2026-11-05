@@ -1,0 +1,12 @@
+# Local settings with database passwords
+config/config.php
+
+# Logs
+storage/logs/*
+!storage/logs/.gitkeep
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
