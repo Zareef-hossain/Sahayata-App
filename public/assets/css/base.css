@@ -1,0 +1,128 @@
+/* =====================================================================
+   base.css — design tokens and browser reset
+   All colours and sizes were measured from the Figma exports
+   (393 x 852 px mobile frames). Change them here, nowhere else.
+   ===================================================================== */
+
+:root {
+    /* ---- Colours ---- */
+    --color-bg: #87DBF2;            /* background of every inner screen */
+    --color-bg-bright: #00C1F6;     /* background of the login (Home Page) screen */
+    --color-surface: #FFFFFF;       /* inputs and cards */
+    --color-secondary: #CCE9F1;     /* Back button, tabs, role / login-type buttons */
+    --color-primary: #3A81E4;       /* main action buttons */
+    --color-danger: #E4543A;        /* Reject, Deactivate */
+    --color-urgency-low: #F3B2A6;
+    --color-urgency-medium: #D78879;
+    --color-urgency-high: #D86045;
+    --color-map: #1B8235;           /* "Google Map Area" placeholder colour */
+    --color-text: #000000;
+    --color-text-on-primary: #FFFFFF;
+    --color-error-text: #7A1405;    /* validation messages (not in Figma; dark red for readability) */
+
+    /* ---- Typography (Inter, as used in the Figma file) ---- */
+    --font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-size-sm: 12px;           /* labels, inputs, buttons, card text */
+    --font-size-md: 16px;           /* bold detail lines, e.g. "Donation ID : #DON-105" */
+    --font-size-lg: 24px;           /* page titles and the Back button */
+    --line-height-sm: 15px;
+    --line-height-md: 30px;
+    --line-height-lg: 29px;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+
+    /* ---- Sizes ---- */
+    --frame-width: 393px;           /* Figma reference width (mobile) */
+    --app-max-width: 480px;         /* tablet / desktop: app is centred at this width */
+    --control-width: 222px;         /* inputs, buttons and cards */
+    --input-height: 20px;
+    --input-height-lg: 43px;        /* Make Donation inputs */
+    --textarea-height: 48px;
+    --button-height: 27px;
+    --option-height: 29px;          /* tabs and choice buttons */
+    --option-width: 91px;
+    --back-width: 98px;
+    --back-height: 42px;
+    --logo-size: 108px;
+    --logo-size-lg: 152px;
+    --page-gutter: 16px;            /* minimum side space on very narrow phones */
+
+    /* ---- Focus outline (keyboard users) ---- */
+    --focus-ring: 2px solid var(--color-text);
+}
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+body.theme-bright {
+    --color-bg: var(--color-bg-bright);
+}
+
+h1, h2, h3, p, ul, ol, dl, dd, figure, fieldset, legend {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+    min-width: 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* Hide visually but keep for screen readers. */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}

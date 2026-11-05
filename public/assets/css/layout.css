@@ -1,0 +1,61 @@
+/* =====================================================================
+   layout.css — page frame and vertical structure
+   Mobile: full width (designed at 393px).
+   Tablet / desktop: the app is centred in a 480px column.
+   ===================================================================== */
+
+.app-shell {
+    position: relative;               /* the Back button is placed inside this box */
+    width: 100%;
+    max-width: var(--app-max-width);
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding-bottom: 48px;
+    background-color: var(--color-bg);
+}
+
+/* ---- Header: Back button + logo + title ---- */
+.page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 77px;                /* logo top edge in Figma */
+}
+
+.page-title {
+    margin-top: 41px;
+    padding-inline: var(--page-gutter);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-lg);
+    font-weight: var(--font-weight-regular);
+    text-align: center;
+}
+
+.page-title__icon {
+    margin-right: 4px;
+}
+
+/* ---- Main content column (222px wide, centred) ---- */
+.content-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-inline: var(--page-gutter);
+}
+
+/* Default spacing of a form screen, measured from "Request for Help". */
+.form {
+    margin-top: 40px;
+}
+
+.form__fields {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 34px;
+}
+
+.form__submit {
+    margin-top: 29px;
+}

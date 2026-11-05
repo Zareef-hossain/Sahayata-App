@@ -1,0 +1,31 @@
+/* Styles only for the Phase 1 component preview page (debug mode). */
+
+.dev-divider {
+    margin: 48px var(--page-gutter);
+    border: 0;
+    border-top: 1px dashed var(--color-text);
+}
+
+.dev-section {
+    gap: 16px;
+}
+
+.dev-section__title {
+    margin-top: 16px;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+}
+
+.dev-section .info-heading {
+    margin-bottom: 0;
+}
+
+.dev-output {
+    width: var(--control-width);
+    max-width: 100%;
+    min-height: 60px;
+    padding: 6px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background-color: var(--color-surface);
+}

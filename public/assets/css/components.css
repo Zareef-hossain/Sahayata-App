@@ -1,0 +1,394 @@
+/* =====================================================================
+   components.css — reusable building blocks
+   Each block matches a PHP component in app/Views/components.
+   Flat style as in Figma: no rounded corners, shadows or gradients.
+   ===================================================================== */
+
+/* ---- Back button (components/back-button.php) ---- */
+.back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: var(--back-width);
+    height: var(--back-height);
+    padding: 6px 0 0 10px;
+    font-size: var(--font-size-lg);
+    line-height: 1;
+    text-decoration: none;
+    background-color: var(--color-secondary);
+}
+
+/* ---- Logo (components/logo.php) ---- */
+.logo--badge {
+    width: var(--logo-size);
+    height: var(--logo-size);
+}
+
+.logo--primary {
+    width: var(--logo-size-lg);
+    height: var(--logo-size-lg);
+    margin-top: -5px;                 /* Home Page logo starts at y=72 */
+}
+
+/* ---- Buttons ---- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--control-width);
+    max-width: 100%;
+    height: var(--button-height);
+    padding: 0 8px;
+    border: 0;
+    border-radius: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-text-on-primary);
+    background-color: var(--color-primary);
+}
+
+.btn:hover {
+    filter: brightness(0.94);
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.btn--danger {
+    background-color: var(--color-danger);
+}
+
+.btn--secondary {
+    color: var(--color-text);
+    background-color: var(--color-secondary);
+}
+
+/* Login, Register Here, Sign Up and SUBMIT REQUEST use black text in Figma. */
+.btn--text-dark {
+    color: var(--color-text);
+}
+
+/* ---- Selected state shared by choice buttons and tabs ----
+   Figma has no selected style; a 2px inner outline is the minimum needed
+   so users can see which option is chosen. */
+.option-group__input:checked + .option-group__item,
+.tab-nav__item.is-active {
+    outline: 2px solid var(--color-text);
+    outline-offset: -2px;
+    font-weight: var(--font-weight-bold);
+}
+
+/* ---- Choice buttons (components/option-group.php) ---- */
+.option-group {
+    max-width: 100%;
+}
+
+.option-group__legend {
+    float: left;                      /* lets the legend take normal margins */
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.option-group__items {
+    clear: both;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.option-group__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.option-group__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--option-width);
+    height: var(--option-height);
+    padding: 0 4px;
+    cursor: pointer;
+    background-color: var(--color-secondary);
+    user-select: none;
+}
+
+.option-group__input:focus-visible + .option-group__item {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.option-group__item--low    { background-color: var(--color-urgency-low); }
+.option-group__item--medium { background-color: var(--color-urgency-medium); }
+.option-group__item--high   { background-color: var(--color-urgency-high); }
+
+.option-group .field__error {
+    margin-top: 6px;
+    text-align: center;
+}
+
+/* ---- Tabs (components/tab-nav.php) ---- */
+.tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tab-nav__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 57px;
+    height: var(--option-height);
+    padding: 0 8px;
+    text-decoration: none;
+    background-color: var(--color-secondary);
+}
+
+/* ---- Form fields (components/form-field.php) ---- */
+.field {
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.field + .field {
+    margin-top: 12px;
+}
+
+.field__label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.field__label--bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.field__control {
+    display: block;
+    width: 100%;
+    height: var(--input-height);
+    padding: 0 6px;
+    border: 0;
+    border-radius: 0;
+    font-size: var(--font-size-sm);
+    background-color: var(--color-surface);
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.field__control::placeholder {
+    color: var(--color-text);         /* placeholders are black in Figma */
+    opacity: 1;
+}
+
+.field__control--lg {
+    height: var(--input-height-lg);
+}
+
+.field__control--center {
+    text-align: center;
+    text-align-last: center;          /* centres the selected text in <select> */
+}
+
+textarea.field__control {
+    height: var(--textarea-height);
+    padding: 3px 6px;
+    resize: none;                     /* no resize handle, as in Figma */
+}
+
+.field__control:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 0;
+}
+
+.field__control.is-invalid {
+    outline: 2px solid var(--color-error-text);
+    outline-offset: -2px;
+}
+
+.field__error {
+    margin-top: 4px;
+    font-size: var(--font-size-sm);
+    color: var(--color-error-text);
+}
+
+.field__error:empty {
+    display: none;
+}
+
+/* ---- Text links, e.g. "Forgot Password? (OTP)" ---- */
+.text-link {
+    padding: 0;
+    border: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    text-decoration: underline;
+    background: none;
+}
+
+/* ---- OTP input (components/otp-input.php) — Figma Sign Up bottom area ---- */
+.otp-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.otp-input__label {
+    margin-bottom: 7px;
+    text-align: center;
+}
+
+.otp-input__control {
+    width: 189px;
+    max-width: 100%;
+    height: var(--button-height);
+    border: 0;
+    border-radius: 0;
+    font-size: var(--font-size-md);
+    letter-spacing: 0.3em;
+    text-align: center;
+    background-color: var(--color-surface);
+}
+
+.otp-input__control.is-invalid {
+    outline: 2px solid var(--color-error-text);
+    outline-offset: -2px;
+}
+
+.otp-input .field__error {
+    text-align: center;
+}
+
+.otp-input__submit {
+    width: var(--option-width);
+    height: var(--option-height);
+    margin-top: 11px;
+}
+
+/* ---- Logout button ---- */
+.logout-form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* ---- TEMPORARY role home page (until Phases 3-7) ---- */
+.placeholder-page {
+    gap: 16px;
+    margin-top: 40px;
+}
+
+.placeholder-page__text {
+    width: var(--control-width);
+    max-width: 100%;
+    text-align: center;
+}
+
+/* ---- Cards (components/card.php) ---- */
+.card {
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.card + .card {
+    margin-top: var(--card-gap, 15px);
+}
+
+.card__body {
+    padding: 6px 7px;
+    background-color: var(--color-surface);
+}
+
+.card__body--sm { min-height: 49px; }
+.card__body--md { min-height: 70px; }
+
+.card__actions {
+    display: flex;
+}
+
+.card__form {
+    display: contents;
+}
+
+.card__action {
+    flex: 1 1 0;
+    width: auto;
+}
+
+/* ---- Headings above lists, e.g. "Approved Requests:" ---- */
+.info-heading {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-bottom: 23px;
+}
+
+.info-heading--bold {
+    font-weight: var(--font-weight-bold);
+}
+
+/* ---- Bold detail lines, e.g. "Donation ID : #DON-105" ---- */
+.detail-list {
+    width: var(--control-width);
+    max-width: 100%;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    font-weight: var(--font-weight-bold);
+}
+
+.detail-list__row dt,
+.detail-list__row dd {
+    display: inline;
+}
+
+/* ---- Flash messages (components/flash.php) ---- */
+.flash-area {
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.flash-area:empty {
+    display: none;
+}
+
+.flash {
+    margin-bottom: 12px;
+    padding: 6px 8px;
+}
+
+.flash--success { background-color: var(--color-secondary); }
+.flash--error   { background-color: var(--color-urgency-low); }
+
+/* ---- Error page ---- */
+.error-page {
+    margin-top: 32px;
+}
+
+.error-page__message {
+    width: var(--control-width);
+    max-width: 100%;
+    text-align: center;
+}
+
+.error-page__details {
+    width: 100%;
+    margin-top: 16px;
+    padding: 8px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background-color: var(--color-surface);
+}

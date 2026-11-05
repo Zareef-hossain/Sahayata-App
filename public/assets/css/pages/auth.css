@@ -1,0 +1,135 @@
+/* =====================================================================
+   auth.css — Login (Figma "Home Page"), Sign Up, Forgot Password
+   Vertical positions (y) in comments refer to the 393 x 852 Figma frames.
+   ===================================================================== */
+
+/* ---------- Login ---------- */
+
+/* Figma text "Welcome back! Please login.", placed between logo and login types. */
+.login-form__welcome {
+    margin-top: 41px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-sm);
+    text-align: center;
+}
+
+.login-form .flash-area {
+    margin-top: 16px;
+}
+
+/* "Choose Login Type :" starts at y=319 */
+.login-form .option-group {
+    margin-top: 39px;
+}
+
+.option-group--login .option-group__legend {
+    margin-bottom: 10px;
+}
+
+/* Two columns (91px + 84px), Victim centred on its own row. */
+.option-group--login .option-group__items {
+    display: grid;
+    grid-template-columns: 91px 84px;
+    column-gap: 15px;
+    row-gap: 10px;
+    justify-content: center;
+}
+
+.option-group--login .option-group__item:last-of-type {
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
+/* "Username / Email :" label at y=503 */
+.login-form__fields {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 48px;
+}
+
+.login-form .field + .field {
+    margin-top: 10px;
+}
+
+.login-form .field__label {
+    margin-bottom: 9px;
+}
+
+/* Figma text "Forgot Password? (OTP)" */
+.login-form__forgot {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Login button at y=649 */
+.login-form__submit {
+    margin-top: 23px;
+}
+
+/* Figma text "Don't have an account?" above "Register Here" (y=755) */
+.login-form__signup-prompt {
+    margin-top: 57px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    line-height: 14px;
+}
+
+/* ---------- Sign Up ---------- */
+
+/* No page title on Sign Up: "Select Role :" starts at y=295 */
+.register-form {
+    margin-top: 110px;
+}
+
+/* Sign Up button at y=623 */
+.register-form__submit {
+    margin-top: 22px;
+}
+
+/* ---------- OTP section (Sign Up + Forgot Password) ---------- */
+
+/* OTP label at y=704 on the Sign Up frame */
+.otp-panel {
+    margin-top: 54px;
+}
+
+.otp-panel[hidden] {
+    display: none;
+}
+
+.otp-panel__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.otp-panel__form .field {
+    margin-bottom: 16px;
+}
+
+.otp-panel__resend {
+    margin-top: 10px;
+}
+
+.otp-panel__notice {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.otp-panel__notice:empty {
+    display: none;
+}
+
+/* ---------- Forgot Password ---------- */
+
+.reset-request-form .flash-area,
+.reset-request-form .field {
+    align-self: center;
+}
+
+.reset-request-form__submit {
+    margin-top: 22px;
+}
