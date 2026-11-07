@@ -5,7 +5,7 @@
  * Props:
  *   $items  array  [['label' => 'Home', 'href' => 'donor/dashboard', 'active' => true, 'width' => 57], ...]
  *                  'width' (px) is optional — use it to match the Figma size of each tab.
- *   $label  string Accessible name of the navigation, e.g. 'Donator menu'
+ *   $label  string Accessible name of the navigation, e.g. 'Donor menu'
  */
 ?>
 <nav class="tab-nav" aria-label="<?= e($label ?? 'Section menu') ?>">

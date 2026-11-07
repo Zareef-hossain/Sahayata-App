@@ -15,7 +15,7 @@ final class Auth
     /** Each role's home page after login. */
     public const ROLE_HOME = [
         'manager'   => 'manager/dashboard',
-        'admin'     => 'admin/approvals',
+        'admin'     => 'admin/dashboard',
         'donor'     => 'donor/dashboard',
         'volunteer' => 'volunteer/tasks',
         'victim'    => 'victim/request-help',
@@ -58,6 +58,31 @@ final class Auth
             return;
         }
         Session::set('_last_activity', time());
+    }
+
+    /**
+     * Re-check the logged-in account against the database (called for every
+     * protected page). Logs the user out if the account was deactivated, deleted
+     * or its role changed, so the session can never keep old permissions.
+     */
+    public static function refresh(): bool
+    {
+        $sessionUser = self::user();
+        if ($sessionUser === null) {
+            return false;
+        }
+
+        $user = \App\Models\User::find((int) $sessionUser['id']);
+        if ($user === null || $user['status'] !== 'active' || $user['role'] !== $sessionUser['role']) {
+            self::logout();
+            Session::start();
+            Session::flash('error', 'Your account is no longer active. Please contact the platform manager.');
+            return false;
+        }
+
+        // Keep the displayed name up to date after profile changes.
+        Session::set(self::SESSION_KEY, [...$sessionUser, 'full_name' => $user['full_name'], 'email' => $user['email']]);
+        return true;
     }
 
     public static function user(): ?array

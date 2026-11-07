@@ -34,6 +34,40 @@ abstract class Controller
         Response::json(['success' => false, 'message' => $message, 'errors' => $errors], $status);
     }
 
+    /**
+     * Validate the submitted JSON/form data. On errors, answers with a JSON error
+     * (field => message) and stops. Returns the submitted data when valid.
+     */
+    protected function validateOrFail(array $rules, array $labels = []): array
+    {
+        $data = $this->request->all();
+        $errors = Validator::validate($data, $rules, $labels);
+        if ($errors !== []) {
+            $this->jsonError('Please fix the highlighted fields.', $errors);
+        }
+        return $data;
+    }
+
+    /**
+     * Run a model action that may refuse with a DomainException (e.g. "already
+     * reviewed") and turn that refusal into a JSON error for the user.
+     */
+    protected function attempt(callable $action): mixed
+    {
+        try {
+            return $action();
+        } catch (\DomainException $refusal) {
+            $this->jsonError($refusal->getMessage(), [], 409);
+        }
+    }
+
+    /** JSON success that also shows $message on the next page as a flash message. */
+    protected function jsonDone(string $message, ?string $redirectPath = null): never
+    {
+        Session::flash('success', $message);
+        $this->json($redirectPath === null ? [] : ['redirect' => url($redirectPath)], $message);
+    }
+
     protected function redirect(string $path): never
     {
         Response::redirect($path);

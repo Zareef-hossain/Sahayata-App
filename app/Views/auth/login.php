@@ -9,7 +9,7 @@ $errors ??= [];
 $loginTypes = [
     ['value' => 'admin',     'label' => 'Admin',     'width' => 91, 'height' => 33],
     ['value' => 'manager',   'label' => 'Manager',   'width' => 84, 'height' => 33],
-    ['value' => 'donor',     'label' => 'Donator',   'width' => 91],
+    ['value' => 'donor',     'label' => 'Donor',   'width' => 91],
     ['value' => 'volunteer', 'label' => 'Volunteer', 'width' => 84],
     ['value' => 'victim',    'label' => 'Victim',    'width' => 91],
 ];

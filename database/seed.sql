@@ -19,7 +19,7 @@ USE sahayata;
 INSERT INTO roles (id, slug, name) VALUES
     (1, 'manager',   'Manager'),
     (2, 'admin',     'Admin'),
-    (3, 'donor',     'Donator'),
+    (3, 'donor',     'Donor'),
     (4, 'volunteer', 'Volunteer'),
     (5, 'victim',    'Victim');
 

@@ -15,7 +15,7 @@ $otpLength = (int) App\Core\Config::get('otp.length', 4);
     <?php component('flash', ['messages' => $flash ?? []]); ?>
 
     <?php component('form-field', [
-        'name' => 'email', 'label' => 'Email  Address :', 'type' => 'email', 'required' => true,
+        'name' => 'email', 'label' => 'Email Address :', 'type' => 'email', 'required' => true,
         'attributes' => ['autocomplete' => 'email', 'maxlength' => 150],
     ]); ?>
     <button class="btn btn--primary btn--text-dark reset-request-form__submit" type="submit">Send OTP</button>

@@ -162,11 +162,12 @@ CREATE TABLE donations (
     CONSTRAINT fk_donations_request   FOREIGN KEY (help_request_id)   REFERENCES help_requests(id) ON DELETE SET NULL,
     CONSTRAINT fk_donations_type      FOREIGN KEY (donation_type_id)  REFERENCES donation_types(id),
     CONSTRAINT fk_donations_method    FOREIGN KEY (payment_method_id) REFERENCES payment_methods(id),
-    INDEX idx_donations_donor (donor_id)
+    INDEX idx_donations_donor (donor_id),
+    INDEX idx_donations_request (help_request_id)
 ) ENGINE=InnoDB;
 
 -- Delivery of relief for one help request.
--- open      = created, waiting for a volunteer to "Accept Task"
+-- pending   = created (after a donation), waiting for a volunteer to "Accept Task"
 -- assigned  = a volunteer is responsible (admin "Assign to this Task" or volunteer accepted)
 -- picked_up / in_transit / delivered = updated by the volunteer on "Delivery Progress"
 CREATE TABLE deliveries (
@@ -176,7 +177,7 @@ CREATE TABLE deliveries (
     volunteer_id      INT UNSIGNED NULL,
     assigned_by       INT UNSIGNED NULL,             -- admin, or NULL when the volunteer accepted it
     items_description VARCHAR(255) NULL,             -- e.g. "50 water bottles"
-    status            ENUM('open', 'assigned', 'picked_up', 'in_transit', 'delivered') NOT NULL DEFAULT 'open',
+    status            ENUM('pending', 'assigned', 'picked_up', 'in_transit', 'delivered') NOT NULL DEFAULT 'pending',
     assigned_at       DATETIME NULL,
     delivered_at      DATETIME NULL,
     created_at        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -57,6 +57,9 @@ final class Validator
             'max'      => mb_strlen($text) <= (int) $argument ? null : "{$label} must be at most {$argument} characters.",
             'numeric'  => is_numeric($text) ? null : "{$label} must be a number.",
             'gt'       => (is_numeric($text) && (float) $text > (float) $argument) ? null : "{$label} must be greater than {$argument}.",
+            'max_value' => (is_numeric($text) && (float) $text <= (float) $argument) ? null : "{$label} must be at most {$argument}.",
+            'between'  => self::isBetween($text, $argument) ? null : "{$label} is out of range.",
+            'integer'  => filter_var($text, FILTER_VALIDATE_INT) !== false ? null : "Please choose a valid {$label}.",
             'in'       => in_array($text, explode(',', $argument), true) ? null : "Please choose a valid {$label}.",
             'digits'   => preg_match('/^\d{' . (int) $argument . '}$/', $text) ? null : "{$label} must be {$argument} digits.",
             'same'     => $text === (string) ($data[$argument] ?? '') ? null : "{$label} does not match.",
@@ -64,6 +67,13 @@ final class Validator
                 ? null : "{$label} must contain at least one letter and one number.",
             default    => throw new \LogicException("Unknown validation rule: {$rule}"),
         };
+    }
+
+    /** 'between:-90,90' — a number inside the range. */
+    private static function isBetween(string $value, string $range): bool
+    {
+        [$min, $max] = array_map('floatval', explode(',', $range));
+        return is_numeric($value) && (float) $value >= $min && (float) $value <= $max;
     }
 
     /** Bangladeshi mobile number: 01XXXXXXXXX (11 digits, operator digit 3-9), optional +88. */

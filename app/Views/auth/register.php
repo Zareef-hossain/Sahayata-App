@@ -21,7 +21,7 @@ $isPending = $pendingUser !== null;
         'legend'   => 'Select Role :',
         'required' => true,
         'options'  => [
-            ['value' => 'donor',     'label' => 'Donator'],
+            ['value' => 'donor',     'label' => 'Donor'],
             ['value' => 'victim',    'label' => 'Victim'],
             ['value' => 'volunteer', 'label' => 'Volunteer', 'width' => 84],
         ],
@@ -33,7 +33,7 @@ $isPending = $pendingUser !== null;
             'attributes' => ['autocomplete' => 'name', 'minlength' => 2, 'maxlength' => 100],
         ]); ?>
         <?php component('form-field', [
-            'name' => 'email', 'label' => 'Email  Address :', 'type' => 'email', 'required' => true,
+            'name' => 'email', 'label' => 'Email Address :', 'type' => 'email', 'required' => true,
             'attributes' => ['autocomplete' => 'email', 'maxlength' => 150],
         ]); ?>
         <?php component('form-field', [

@@ -106,6 +106,73 @@ final class User extends Model
         );
     }
 
+    /** Users of the given roles (admin "Users" tab), newest first. */
+    public static function listByRoles(array $roles): array
+    {
+        $params = [];
+        foreach (array_values($roles) as $index => $role) {
+            $params['r' . $index] = $role;
+        }
+        $placeholders = implode(', ', array_map(static fn (string $key) => ':' . $key, array_keys($params)));
+
+        return self::fetchAll(
+            'SELECT ' . self::PUBLIC_COLUMNS . " FROM users u JOIN roles r ON r.id = u.role_id
+             WHERE r.slug IN ({$placeholders}) ORDER BY u.created_at DESC, u.id DESC",
+            $params
+        );
+    }
+
+    /** Number of accounts per role: ['manager' => 1, 'admin' => 2, ...] (all roles listed). */
+    public static function countByRole(): array
+    {
+        $rows = self::fetchAll(
+            'SELECT r.slug, COUNT(u.id) AS total FROM roles r LEFT JOIN users u ON u.role_id = r.id GROUP BY r.id, r.slug'
+        );
+        return array_column(array_map(static fn (array $row) => [$row['slug'], (int) $row['total']], $rows), 1, 0);
+    }
+
+    /** Manager: activate or deactivate an ADMIN account (never other roles). */
+    public static function setAdminStatus(int $adminId, string $status): void
+    {
+        if (!in_array($status, ['active', 'inactive'], true)) {
+            throw new \InvalidArgumentException('Invalid status.');
+        }
+        $changed = self::execute(
+            "UPDATE users u JOIN roles r ON r.id = u.role_id AND r.slug = 'admin'
+             SET u.status = :status WHERE u.id = :id",
+            ['status' => $status, 'id' => $adminId]
+        );
+        if ($changed === 0 && self::fetchOne(
+            "SELECT u.id FROM users u JOIN roles r ON r.id = u.role_id AND r.slug = 'admin' WHERE u.id = :id",
+            ['id' => $adminId]
+        ) === null) {
+            throw new \DomainException('Administrator not found.');
+        }
+    }
+
+    public static function updateProfile(int $id, string $fullName, string $phone): void
+    {
+        self::execute(
+            'UPDATE users SET full_name = :name, phone = :phone WHERE id = :id',
+            ['name' => trim($fullName), 'phone' => self::normalizePhone($phone), 'id' => $id]
+        );
+    }
+
+    /** Is this phone number used by a DIFFERENT account? */
+    public static function phoneTakenByOther(string $phone, int $userId): bool
+    {
+        return self::fetchOne(
+            'SELECT id FROM users WHERE phone = :phone AND id <> :id',
+            ['phone' => self::normalizePhone($phone), 'id' => $userId]
+        ) !== null;
+    }
+
+    public static function passwordMatches(int $id, string $password): bool
+    {
+        $row = self::fetchOne('SELECT password_hash FROM users WHERE id = :id', ['id' => $id]);
+        return $row !== null && password_verify($password, $row['password_hash']);
+    }
+
     public static function normalizeEmail(string $email): string
     {
         return mb_strtolower(trim($email));

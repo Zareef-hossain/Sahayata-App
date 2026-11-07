@@ -38,7 +38,7 @@ $disasterOptions = array_map(
         ]); ?>
         <?php component('form-field', [
             'name' => 'contact_phone', 'label' => 'Phone Number :', 'type' => 'tel',
-            'placeholder' => 'Enter  Contract Number', 'required' => true, 'center' => true,
+            'placeholder' => 'Enter Contact Number', 'required' => true, 'center' => true,
             'attributes' => ['data-rule' => 'phone', 'inputmode' => 'tel'],
         ]); ?>
         <?php component('form-field', [

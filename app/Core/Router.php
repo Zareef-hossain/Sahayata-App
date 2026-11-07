@@ -95,7 +95,8 @@ final class Router
 
     private function requireLogin(Request $request): void
     {
-        if (Auth::check()) {
+        // refresh() also logs out accounts that were deactivated since login.
+        if (Auth::check() && Auth::refresh()) {
             return;
         }
         if ($request->wantsJson()) {

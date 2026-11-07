@@ -286,18 +286,6 @@ textarea.field__control {
     width: 100%;
 }
 
-/* ---- TEMPORARY role home page (until Phases 3-7) ---- */
-.placeholder-page {
-    gap: 16px;
-    margin-top: 40px;
-}
-
-.placeholder-page__text {
-    width: var(--control-width);
-    max-width: 100%;
-    text-align: center;
-}
-
 /* ---- Cards (components/card.php) ---- */
 .card {
     width: var(--control-width);
@@ -334,6 +322,9 @@ textarea.field__control {
     width: var(--control-width);
     max-width: 100%;
     margin-bottom: 23px;
+    font-size: var(--font-size-sm);          /* <h2> elements: keep the Figma 12px text style */
+    line-height: var(--line-height-sm);
+    font-weight: var(--font-weight-regular);
 }
 
 .info-heading--bold {
@@ -391,4 +382,223 @@ textarea.field__control {
     white-space: pre-wrap;
     word-break: break-word;
     background-color: var(--color-surface);
+}
+
+/* =====================================================================
+   Phase 3-7 components
+   ===================================================================== */
+
+/* "< Back" that logs out (a <button> inside a POST form) looks like the link version. */
+.back-button-form {
+    display: contents;
+}
+
+button.back-button {
+    border: 0;
+    border-radius: 0;
+    font-family: inherit;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+/* Extra field heights from the Make Donation screen. */
+.field__control--sm { height: 28px; }   /* Enter Mobile Number */
+.field__control--xl { height: 59px; }   /* Payment Method */
+
+/* Vertical list of cards with the Figma gap between them. */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.card-list .card + .card {
+    margin-top: var(--card-gap, 15px);
+}
+
+.card-list--compact {
+    --card-gap: 12px;
+}
+
+.card__line {
+    overflow-wrap: anywhere;
+}
+
+/* Headings above lists, e.g. "Approved Requests:" */
+.list-heading {
+    margin-bottom: 12px;
+}
+
+.section-gap {
+    margin-top: 32px;
+}
+
+/* Friendly text when a list is empty. */
+.empty-state {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+/* Small notes, e.g. "Demo payment ..." */
+.demo-note {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 14px;
+    text-align: center;
+}
+
+.demo-note--left {
+    margin: 0 0 12px;
+    text-align: left;
+}
+
+/* Row of small text links, e.g. "Track My Request · My Profile" */
+.link-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 32px;
+}
+
+/* ---- OpenStreetMap area (components/osm-map.php), Figma 222 x 76 ---- */
+.osm-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.osm-map__frame,
+.osm-map__placeholder {
+    display: block;
+    width: 100%;
+    height: 76px;
+    border: 0;
+    background-color: var(--color-map);
+}
+
+.osm-map__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    text-align: center;
+}
+
+.osm-map__hint {
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.osm-map__link {
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+/* ---- Request progress (components/status-timeline.php) ---- */
+.timeline {
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.timeline__steps {
+    margin-top: 6px;
+    padding: 0;
+    list-style: none;
+}
+
+.timeline__step + .timeline__step {
+    margin-top: 2px;
+}
+
+.timeline__step--current {
+    font-weight: var(--font-weight-bold);
+}
+
+.timeline__date {
+    font-size: 11px;
+    font-weight: var(--font-weight-regular);
+}
+
+.timeline__rejected {
+    margin-top: 6px;
+    font-weight: var(--font-weight-bold);
+}
+
+.timeline__note {
+    margin-top: 4px;
+}
+
+/* ---- Delivery "Select Status" box: blue bar + white list (Figma "Delivery") ---- */
+.status-picker {
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.status-picker__heading {
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.status-picker__bar {
+    clear: both;
+    display: flex;
+    align-items: center;
+    height: var(--button-height);
+    padding: 0 8px;
+    color: var(--color-text-on-primary);
+    background-color: var(--color-primary);
+}
+
+.status-picker__list {
+    min-height: 69px;
+    margin: 0;
+    padding: 8px 8px 8px 9px;
+    list-style: none;
+    background-color: var(--color-surface);
+}
+
+.status-picker__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+/* Each option looks like the Figma bullet item; the chosen one is bold with a filled dot. */
+.status-picker__option {
+    display: block;
+    cursor: pointer;
+}
+
+.status-picker__option::before {
+    content: "○ ";
+}
+
+.status-picker__input:checked + .status-picker__option {
+    font-weight: var(--font-weight-bold);
+}
+
+.status-picker__input:checked + .status-picker__option::before {
+    content: "● ";
+}
+
+.status-picker__input:focus-visible + .status-picker__option {
+    outline: var(--focus-ring);
+    outline-offset: 1px;
+}
+
+.status-picker .field__error {
+    margin-top: 6px;
 }

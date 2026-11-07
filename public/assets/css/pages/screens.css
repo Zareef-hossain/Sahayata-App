@@ -1,0 +1,286 @@
+/* =====================================================================
+   screens.css — spacing of the role screens (Victim, Donor, Admin,
+   Volunteer, Manager, Profile).
+   Numbers come from the 393 x 852 Figma frames; "y=" comments give the
+   Figma position each rule recreates.
+   ===================================================================== */
+
+/* ---------- Tabs: y=330 on every tabbed screen (Manager: y=293) ----------
+   Space after the title = tab y - (logo bottom 185 + title gap + title 29). */
+.screen--donor .tab-nav,
+.screen--profile .tab-nav     { margin-top: 75px; }  /* title gap 41 */
+.screen--admin .tab-nav       { margin-top: 80px; }  /* title gap 36 */
+.screen--volunteer .tab-nav   { margin-top: 85px; }  /* title gap 31 */
+.screen--manager .tab-nav     { margin-top: 59px; }  /* title gap 20, tabs y=293 */
+
+.screen--with-tabs > .flash-area {
+    margin-top: 16px;
+}
+
+/* ---------- Donor dashboard (Figma "Donator") ---------- */
+.screen--donor .list-heading {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 34px;            /* "Approved Requests:" y=393 */
+    margin-bottom: 31px;         /* first card y=439 */
+}
+
+.screen--donor .card-list:not(.card-list--compact) {
+    --card-gap: 64px;            /* second card y=579 */
+}
+
+/* ---------- Make Donation (Figma "Donation") ---------- */
+.screen--donate .donate-for {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 16px;
+}
+
+.donate-fields {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 56px;            /* first label y=311 */
+}
+
+.donate-for + .donate-fields {
+    margin-top: 25px;
+}
+
+.donate-fields .field__label {
+    margin-bottom: 2px;
+}
+
+.donate-fields .field + .field                 { margin-top: 9px; }
+.donate-fields .field:nth-child(3)             { margin-top: 15px; }
+.donate-fields .field:nth-child(4)             { margin-top: 17px; }
+
+.donate-submit {
+    margin-top: 27px;            /* Confirm Payment y=622 */
+}
+
+/* ---------- Admin: Request Approvals (Figma "Request approvals") ---------- */
+.screen--admin .list-heading {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 53px;            /* "Pending Victim Requests:" y=412 */
+    margin-bottom: 7px;          /* first card y=434 */
+}
+
+.screen--admin .card-list:not(.card-list--compact) {
+    --card-gap: 48px;            /* second card y=579 */
+}
+
+/* ---------- Admin: Assign Delivery (Figma "Assign Delivery") ---------- */
+.screen--assign .detail-list {
+    margin-top: 51px;            /* first detail line y=290 */
+}
+
+.screen--assign .volunteers-heading {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 85px;            /* "Available Volunteers :" y=495 */
+    margin-bottom: 13px;         /* first card y=523 */
+}
+
+.card-list--assign {
+    --card-gap: 22px;            /* second card y=643 */
+}
+
+/* ---------- Volunteer Tasks (Figma "Vulunteer task") ---------- */
+.status-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 47px;            /* status button y=406 */
+}
+
+.status-row__button {
+    width: 149px;
+}
+
+.screen--volunteer .list-heading {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 28px;            /* "Pending Deliveries near you:" y=461 */
+    margin-bottom: 12px;         /* first card y=488 */
+}
+
+.screen--volunteer .card-list {
+    --card-gap: 15px;            /* second card y=579 */
+}
+
+/* History tab has no status row: keep the heading below the tabs. */
+.screen--volunteer .tab-nav + .list-heading,
+.screen--volunteer .flash-area + .list-heading {
+    margin-top: 34px;
+}
+
+/* ---------- Delivery Progress (Figma "Delivery") ---------- */
+.screen--delivery .detail-list {
+    margin-top: 73px;            /* first detail line y=312 */
+}
+
+.delivery-extra {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 8px;
+}
+
+.status-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;            /* "Update Current Status :" y=495 */
+}
+
+.status-form__submit {
+    margin-top: 49px;            /* Update Status y=670 */
+}
+
+/* ---------- Manager Dashboard (Figma "Manager Dashboard") ---------- */
+.stats-heading,
+.admins-heading,
+.stats-lines {
+    width: var(--control-width);
+    max-width: 100%;
+}
+
+.stats-heading {
+    margin-top: 84px;            /* "System Statistics:" y=406 */
+    margin-bottom: 7px;
+}
+
+.stats-lines {
+    font-weight: var(--font-weight-bold);
+}
+
+.admins-heading {
+    margin-top: 65px;            /* "Admin Management :" y=523 */
+    margin-bottom: 4px;          /* first card y=542 */
+}
+
+.create-admin-button {
+    margin-top: 41px;            /* "+ Create New Admin" y=680 */
+}
+
+/* ---------- Track My Request (Figma "Track Request") ---------- */
+.screen--track .osm-map {
+    margin-top: 35px;            /* map y=290 */
+}
+
+.track-block {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 24px;
+}
+
+.track-block--relief {
+    margin-top: 29px;            /* "Nearest Relief Point" y=414 */
+}
+
+.track-summary {
+    margin-bottom: 10px;
+}
+
+.volunteer-info {
+    font-weight: var(--font-weight-bold);
+}
+
+.request-list {
+    margin-top: 6px;
+    padding: 0;
+    list-style: none;
+}
+
+.request-list li + li {
+    margin-top: 6px;
+}
+
+.request-list .is-current {
+    font-weight: var(--font-weight-bold);
+}
+
+/* ---------- Request for Help: "📍 My Location" ---------- */
+.location-field {
+    position: relative;
+    margin-top: 12px;
+}
+
+.location-field + .field {
+    margin-top: 12px;
+}
+
+/* Sits on the right of the "Location:" label row, so nothing moves. */
+.location-field__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+}
+
+.location-field__status {
+    margin-top: 4px;
+    font-size: 11px;
+    line-height: 14px;
+}
+
+.location-field__status:empty {
+    display: none;
+}
+
+/* ---------- Profile ---------- */
+.profile-summary,
+.profile-form {
+    width: var(--control-width);
+    max-width: 100%;
+    margin-top: 28px;
+}
+
+.screen--profile:not(.screen--with-tabs) .profile-summary {
+    margin-top: 40px;
+}
+
+.profile-summary div + div {
+    margin-top: 4px;
+}
+
+.profile-summary dt {
+    display: inline;
+    font-weight: var(--font-weight-bold);
+}
+
+.profile-summary dd {
+    display: inline;
+    overflow-wrap: anywhere;
+}
+
+.profile-form .info-heading {
+    margin-bottom: 10px;
+}
+
+.profile-form__submit {
+    margin-top: 16px;
+}
+
+.screen--profile .logout-form {
+    margin-top: 32px;
+}
+
+/* ---------- Create New Admin ---------- */
+.form__fields--flush {
+    margin-top: 0;
+}
+
+/* ---------- Later sections on long screens ---------- */
+.list-heading.section-gap {
+    margin-top: 40px;
+}
+
+/* Headings inside the Track blocks sit close to their text (Figma "Volunteer Info:"). */
+.track-block .info-heading,
+.timeline .info-heading {
+    margin-bottom: 4px;
+}
